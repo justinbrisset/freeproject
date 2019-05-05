@@ -26,6 +26,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 const index = require('./routes/index');
 app.use('/', index);
 
+const auth = require('./routes/auth');
+app.use('/', auth);
+
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');
