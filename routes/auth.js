@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 // const User = require('../models/users');
 
-const bcrypt         = require("bcrypt");
+const bcrypt         = require("bcryptjs");
 const bcryptSalt     = 10;
 
 
@@ -103,5 +103,18 @@ let isAuthenticated = (req, res, next) => {
   }
 }
 
+<<<<<<< HEAD
+=======
+// router.get('/dashboard', isAuthenticated, (req, res, next) => {
+//   res.render('dashboard');
+// });
+// router.get('/integrations', isAuthenticated, (req, res, next) => {
+//   res.render('integrations');
+// });
+// router.get('/invoices', isAuthenticated, (req, res, next) => {
+//   res.render('invoices');
+// });
+
+>>>>>>> 807b0c7c923bb1570980969c9883745c45d6f193
 
 module.exports = router;
