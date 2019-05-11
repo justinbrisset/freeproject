@@ -23,11 +23,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const index = require('./routes/index');
-app.use('/', index);
 
 const auth = require('./routes/auth');
 app.use('/', auth);
+
+const index = require('./routes/index');
+app.use('/', index);
+
+const invoices = require('./routes/invoices');
+app.use('/invoices', invoices);
+
+const integrations = require('./routes/integrations');
+app.use('/integrations', integrations);
+
+const dashboard = require('./routes/dashboard');
+app.use('/dashboard', dashboard);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

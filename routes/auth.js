@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 // const User = require('../models/users');
 
-const bcrypt         = require("bcrypt");
+const bcrypt         = require("bcryptjs");
 const bcryptSalt     = 10;
 
 
@@ -27,10 +27,38 @@ router.post('/signup', (req, res, next) => {
   })
 });
 
-
 router.get('/signin', (req, res, next) => {
   res.render('signin');
 });
+
+// authRoutes.post("/signin", (req, res, next) => {
+//   passport.authenticate("local", (err, theUser, failureDetails) => {
+//     if (err) {
+//       res.render('index', {error: "Something went wrong."})
+//       return;
+//     }
+
+//     if (!theUser) {
+//       // "failureDetails" contains the error messages
+//       // from our logic in "LocalStrategy" { message: '...' }.
+//       res.render('index', {error: "The user does not exist."})
+//       return;
+//     }
+
+//     // save user in session
+//     req.login(theUser, err => {
+//       if (err) {
+//         res.render('index', {error: "Something went wrong."})
+//         return;
+//       }
+
+//       // We are now logged in (that's why we can also send req.user)
+//       res.status(200).json(theUser);
+//     });
+//   })(req, res, next);
+// });
+
+
 
 router.post("/signin", (req, res, next) => {
   const theUsername = req.body.username;
@@ -54,7 +82,7 @@ router.post("/signin", (req, res, next) => {
       if (bcrypt.compareSync(thePassword, user.password)) {
         // Save the login in the session!
         req.session.currentUser = user;
-        res.redirect("/");
+        res.redirect("/dashboard");
       } else {
         res.render("signin", {
           errorMessage: "Incorrect password"
@@ -75,12 +103,15 @@ let isAuthenticated = (req, res, next) => {
   }
 }
 
-router.get('/workspaces', isAuthenticated, (req, res, next) => {
-  res.render('workspaces');
+router.get('/dashboard', isAuthenticated, (req, res, next) => {
+  res.render('dashboard');
+});
+router.get('/integrations', isAuthenticated, (req, res, next) => {
+  res.render('integrations');
+});
+router.get('/invoices', isAuthenticated, (req, res, next) => {
+  res.render('invoices');
 });
 
-router.get('/pompom', (req, res, next) => {
-  res.render('index');
-});
 
 module.exports = router;
