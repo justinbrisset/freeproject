@@ -103,15 +103,5 @@ let isAuthenticated = (req, res, next) => {
   }
 }
 
-// router.get('/dashboard', isAuthenticated, (req, res, next) => {
-//   res.render('dashboard');
-// });
-// router.get('/integrations', isAuthenticated, (req, res, next) => {
-//   res.render('integrations');
-// });
-// router.get('/invoices', isAuthenticated, (req, res, next) => {
-//   res.render('invoices');
-// });
-
 
 module.exports = router;
