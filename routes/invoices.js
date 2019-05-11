@@ -2,7 +2,15 @@ const express = require('express');
 const router  = express.Router();
 
 /* GET invoices page. */
-router.get('/invoices', (req, res, next) => {
+let isAuthenticated = (req, res, next) => {
+  if (req.session.currentUser) {
+    next();
+  } else {
+    res.redirect("/signin");
+  }
+}
+
+router.get('/invoices', isAuthenticated, (req, res, next) => {
   res.render('invoices');
 });
 
