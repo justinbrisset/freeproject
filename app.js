@@ -10,7 +10,7 @@ const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'hbs');
 
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
@@ -48,6 +48,7 @@ app.use((req, res, next) => {
 
 // error handler
 app.use((err, req, res, next) => {
+  console.log(err);
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
